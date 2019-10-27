@@ -7,8 +7,6 @@ Tired of the boilerplate? Chartflo is a wrapper around different charting librar
 
 ## Timeseries
 
-### Simple chart
-
    ```dart
    final dataset = <DateTime,num>{someDate1: 5, someDate2: 8 /* ... */};
    Widget chart = TimeSerieChart(dataset: dataset);
@@ -16,7 +14,7 @@ Tired of the boilerplate? Chartflo is a wrapper around different charting librar
 
 ![Simple chart](img/simple.png)
 
-### Options
+### Chart options
 
    ```dart
    Container(
@@ -43,8 +41,7 @@ The timeseries can be grouped by time periods prior to charting: example:
       dataset: dataset,
       showPoints: true,
       showArea: true,
-      resample: Resample(
-         timePeriod: const Duration(days: 1))
+      resample: Resample(timePeriod: const Duration(days: 1))
    );
    ```
 
