@@ -22,7 +22,7 @@ Tired of the boilerplate? Chartflo is a wrapper around different charting librar
    Container(
       height: 200.0,
       color: Colors.black,
-      child: Widget chart = TimeSerieChart(
+      child: TimeSerieChart(
          dataset: dataset,
          lineColor: Colors.red,
          textColor: Colors.white,
