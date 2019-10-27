@@ -1,22 +1,5 @@
 import 'package:flutter/foundation.dart';
-
-/// A datapoint for chart with x and y values
-class ChartDataPoint<X, Y> {
-  /// Provide x and y
-  ChartDataPoint({@required this.x, @required this.y});
-
-  final X x;
-  final Y y;
-}
-
-/// The resample method
-enum ResampleMethod {
-  /// sum method
-  sum,
-
-  /// mean method
-  mean
-}
+import '../types.dart';
 
 /// A resample definition
 class Resample {

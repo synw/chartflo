@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:ml_linalg/linalg.dart';
-import '../models.dart';
+import '../types.dart';
 
 /// A time frame
 class TimeFrame {
