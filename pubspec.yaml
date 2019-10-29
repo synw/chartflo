@@ -15,6 +15,7 @@ dependencies:
   charts_flutter: ^0.8.1
   bezier_chart: ^1.0.15
   ml_linalg: ^12.3.0
+  flutter_sparkline: ^0.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

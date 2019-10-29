@@ -2,14 +2,11 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
 import '../colors.dart';
-import '../models/base_chart.dart';
 import '../models/chart_datapoint.dart';
 import '../models/resample.dart';
-import '../models/timeserie_chart.dart';
 import 'timeframe.dart';
 
-class _TimeSerieChartState extends State<TimeSerieChart>
-    with BaseChart, BaseTimeSerieChart {
+class _TimeSerieChartState extends State<TimeSerieChart> {
   _TimeSerieChartState(
       {@required this.dataset,
       this.showPoints = false,
@@ -28,20 +25,15 @@ class _TimeSerieChartState extends State<TimeSerieChart>
     _axisColor = getColorForFlutterCharts(axisColor);
   }
 
-  @override
-  final Map<DateTime, num> dataset;
-
-  @override
   final Color textColor;
 
-  @override
   final Color axisColor;
 
-  @override
   final int fontSize;
 
-  @override
   final Resample resample;
+
+  final Map<DateTime, num> dataset;
 
   final bool showPoints;
 
