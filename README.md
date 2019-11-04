@@ -45,7 +45,27 @@ The timeseries can be grouped by time periods prior to charting: example:
    );
    ```
 
-This will group and mean the data by one day. Check the example for more details
+This will group and mean the data by one day. Check the example for more details. A
+standalone function is available to resample data outside of a chart:
+
+   ```dart
+   final newSerie = TimeFrame.resample(
+      dataset: <DateTime, num>[ /* some data */ ],
+      timePeriod: const Duration(hours: 1),
+      resampleMethod = ResampleMethod.sum);
+   ```
+
+## Sparkline
+
+A simple sparkline is available:
+
+   ```dart
+   SparklineChart(
+      dataset: <double>[1.2, 2.3, 1.7],
+      lineColor: Colors.blueGrey,
+      lineWidth: 2.0,
+      areaColor: Colors.grey[200])
+   ```
 
 ## Todo
 
