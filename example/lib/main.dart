@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'charts/resample.dart';
 import 'charts/simple.dart';
+import 'charts/sparkline.dart';
 import 'data.dart';
 import 'index.dart';
 
@@ -14,6 +15,7 @@ final Map<String, StatelessWidget Function(BuildContext)> routes = {
   '/': (BuildContext context) => PageIndex(),
   '/simple': (BuildContext context) => SimpleChartPage(),
   '/resample': (BuildContext context) => ResampleChartPage(),
+  '/sparkline': (BuildContext context) => SparklinePage(),
 };
 
 class MyApp extends StatelessWidget {

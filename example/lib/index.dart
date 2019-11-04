@@ -22,13 +22,18 @@ class PageIndex extends StatelessWidget {
                   iconData: Icons.date_range,
                   route: "/resample",
                 ),
+                _ExampleTile(
+                  title: "Sparkline",
+                  iconData: Icons.show_chart,
+                  route: "/sparkline",
+                ),
               ],
             )));
   }
 }
 
 class _ExampleTile extends StatelessWidget {
-  _ExampleTile(
+  const _ExampleTile(
       {@required this.iconData, @required this.title, @required this.route});
 
   final IconData iconData;

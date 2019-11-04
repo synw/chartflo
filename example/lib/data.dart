@@ -1,12 +1,23 @@
 import 'dart:math';
 
+final _rng = Random();
+
 /// The generated data
 Map<DateTime, num> dataset;
+
+List<double> generateFlatData() {
+  final res = <double>[];
+  var i = 0;
+  while (i < 50) {
+    res.add(_rng.nextDouble() * 10);
+    ++i;
+  }
+  return res;
+}
 
 /// Generate random data
 Map<DateTime, num> generateData() {
   print("Generating random data");
-  final _rng = Random();
   final res = <DateTime, num>{};
   final dateNow = DateTime.now();
   final startDate = DateTime(dateNow.year, dateNow.month, dateNow.day)
