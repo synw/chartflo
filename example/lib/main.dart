@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'charts/resample.dart';
-import 'charts/simple.dart';
-import 'charts/sparkline.dart';
-import 'data.dart';
 import 'index.dart';
+import 'pages/radar.dart';
+import 'pages/resample.dart';
+import 'pages/simple.dart';
+import 'pages/sparkline.dart';
 
-void main() {
-  runApp(MyApp());
-  dataset = generateData();
-}
+void main() => runApp(MyApp());
 
 final Map<String, StatelessWidget Function(BuildContext)> routes = {
   '/': (BuildContext context) => PageIndex(),
   '/simple': (BuildContext context) => SimpleChartPage(),
   '/resample': (BuildContext context) => ResampleChartPage(),
   '/sparkline': (BuildContext context) => SparklinePage(),
+  '/radar': (BuildContext context) => RadarChartPage(),
 };
 
 class MyApp extends StatelessWidget {

@@ -27,6 +27,11 @@ class PageIndex extends StatelessWidget {
                   iconData: Icons.show_chart,
                   route: "/sparkline",
                 ),
+                _ExampleTile(
+                  title: "Radar",
+                  iconData: Icons.call_split,
+                  route: "/radar",
+                ),
               ],
             )));
   }
