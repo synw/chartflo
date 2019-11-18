@@ -55,7 +55,7 @@ standalone function is available to resample data outside of a chart:
       resampleMethod = ResampleMethod.sum);
    ```
 
-## Sparkline
+### Sparkline
 
 A simple sparkline is available:
 
@@ -66,6 +66,32 @@ A simple sparkline is available:
       lineWidth: 2.0,
       areaColor: Colors.grey[200])
    ```
+
+## Categorical data
+
+### Radar chart
+
+   ```dart
+   RadarChart(
+      dataset: <String, double>{
+            "one": 16.2,
+            "two": 8.3,
+            "three": 11.7,
+            "four": 6.7,
+            "five": 12.1,
+          },
+      lineColor: Colors.blueGrey,
+      textColor: Colors.black,
+      areaColor: Colors.green,
+      labelWidth: 120.0,
+      animationDuration: 0
+   );
+   ```
+
+The only required parameter is `dataset`. To disable the animation set it's
+duration to 0.
+
+![Radar chart](img/radar.png)
 
 ## Todo
 
