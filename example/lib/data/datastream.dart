@@ -26,7 +26,8 @@ class DataStreamer {
 
   bool get hasData => _hasData;
 
-  Future<void> run({int index = 0}) async {
+  Future<void> run(
+      {int index = 0, Duration speed = const Duration(seconds: 1)}) async {
     assert(_hasData);
     print("Running data stream");
     var _index = index;
@@ -40,7 +41,7 @@ class DataStreamer {
       if (_run == false) {
         return;
       }
-      await Future<void>.delayed(const Duration(seconds: 1));
+      await Future<void>.delayed(speed);
     }
   }
 
@@ -54,6 +55,7 @@ class DataStreamer {
     df = await DataFrame.fromCsv("data/btc.csv");
     print("Loaded stock data:");
     df
+      ..sort("timestamp")
       ..show()
       ..cols();
     _hasData = true;

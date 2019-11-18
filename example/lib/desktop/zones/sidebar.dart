@@ -58,14 +58,7 @@ class Sidebar extends StatelessWidget {
           ListTile(
             title: GestureDetector(
               child: const Text("Real time"),
-              onTap: () => zones.update(
-                  "main",
-                  Row(
-                    children: <Widget>[
-                      const PadVertical(10.0, child: Text("Real time")),
-                      RealTimeChart()
-                    ],
-                  )),
+              onTap: () => zones.update("main", RealTimeChart()),
             ),
           ),
         ]),
