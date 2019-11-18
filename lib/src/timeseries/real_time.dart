@@ -16,7 +16,8 @@ class _RealTimeTimeSeriesChartState extends State<RealTimeTimeSeriesChart> {
       this.textColor = Colors.black,
       this.fontSize = 14,
       this.lineColor = Colors.blue,
-      this.axisColor = Colors.grey})
+      this.axisColor = Colors.grey,
+      this.maxDataPoint})
       : assert(dataStream != null);
 
   final Color textColor;
@@ -37,6 +38,8 @@ class _RealTimeTimeSeriesChartState extends State<RealTimeTimeSeriesChart> {
 
   final Color lineColor;
 
+  final int maxDataPoint;
+
   final _seriesList = <charts.Series<dynamic, DateTime>>[];
   final _dataPoints = <ChartDataPoint<DateTime, num>>[];
   bool _ready = false;
@@ -49,6 +52,11 @@ class _RealTimeTimeSeriesChartState extends State<RealTimeTimeSeriesChart> {
     // set data stream listener
     _sub = dataStream.listen((dataPoints) {
       setState(() {
+        if (maxDataPoint != null) {
+          if (_dataPoints.length >= maxDataPoint) {
+            _dataPoints.removeAt(0);
+          }
+        }
         _seriesList[0] = addDataPoints(dataPoints);
       });
     });
@@ -107,7 +115,8 @@ class RealTimeTimeSeriesChart extends StatefulWidget {
       this.textColor = Colors.black,
       this.fontSize = 14,
       this.lineColor = Colors.blue,
-      this.axisColor = Colors.black});
+      this.axisColor = Colors.black,
+      this.maxDataPoint});
 
   /// The dataset to chart
   final Map<DateTime, num> initialDataset;
@@ -136,6 +145,9 @@ class RealTimeTimeSeriesChart extends StatefulWidget {
   /// The text label font size in poits
   final int fontSize;
 
+  /// Limit to a number of datapoints
+  final int maxDataPoint;
+
   @override
   _RealTimeTimeSeriesChartState createState() => _RealTimeTimeSeriesChartState(
       initialDataset: initialDataset,
@@ -146,5 +158,6 @@ class RealTimeTimeSeriesChart extends StatefulWidget {
       textColor: textColor,
       fontSize: fontSize,
       lineColor: lineColor,
-      axisColor: axisColor);
+      axisColor: axisColor,
+      maxDataPoint: maxDataPoint);
 }
