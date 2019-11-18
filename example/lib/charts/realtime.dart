@@ -5,19 +5,26 @@ import 'package:pedantic/pedantic.dart';
 import '../data/datastream.dart';
 
 class _RealTimeChartState extends State<RealTimeChart> {
-  final _ds = DataStreamer();
+  Map<DateTime, num> initialDataset = <DateTime, num>{};
+  bool ready = false;
 
   Future<void> loadData() async {
-    await _ds.loadDataFrame();
+    if (!ds.hasData) {
+      await ds.loadDataFrame();
+    }
+    // set initial dataset
+    final df2 = ds.df.subset_(0, 500);
+    df2.rows.forEach((row) =>
+        initialDataset[row["date"] as DateTime] = row["close"] as double);
     // start the data feed
-    unawaited(_ds.run());
-    _ds.dataStream.listen(print);
+    unawaited(ds.run(index: 501));
+    ds.dataStream.listen(print);
   }
 
   @override
   void initState() {
-    loadData();
     super.initState();
+    loadData().then((_) => setState(() => ready = true));
   }
 
   @override
@@ -25,7 +32,10 @@ class _RealTimeChartState extends State<RealTimeChart> {
     return Container(
         height: 200.0,
         width: 500.0,
-        child: RealTimeTimeSeriesChart(dataStream: _ds.dataStream));
+        child: ready
+            ? RealTimeTimeSeriesChart(
+                dataStream: ds.dataStream, initialDataset: initialDataset)
+            : const Center(child: CircularProgressIndicator()));
   }
 }
 

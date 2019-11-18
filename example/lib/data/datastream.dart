@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:df/df.dart';
 import 'package:pedantic/pedantic.dart';
 
+final DataStreamer ds = DataStreamer();
+
 /*Future<void> main() async {
   final ds = DataStreamer();
   await ds.loadDataFrame();
@@ -17,16 +19,21 @@ class DataStreamer {
   final StreamController<Map<DateTime, num>> _streamController =
       StreamController<Map<DateTime, num>>.broadcast();
   bool _run = false;
-  int _index = 0;
+
+  bool _hasData = false;
 
   Stream<Map<DateTime, num>> get dataStream => _streamController.stream;
 
-  Future<void> run() async {
+  bool get hasData => _hasData;
+
+  Future<void> run({int index = 0}) async {
+    assert(_hasData);
     print("Running data stream");
+    var _index = index;
     _run = true;
     for (final row in df.subset(_index, df.length)) {
-      final date = row["Date"] as DateTime;
-      final n = row["Close"] as num;
+      final date = row["date"] as DateTime;
+      final n = row["close"] as num;
       final dp = <DateTime, num>{date: n};
       _streamController.sink.add(dp);
       ++_index;
@@ -49,6 +56,7 @@ class DataStreamer {
     df
       ..show()
       ..cols();
+    _hasData = true;
     return df;
   }
 

@@ -32,6 +32,11 @@ class PageIndex extends StatelessWidget {
                   iconData: Icons.call_split,
                   route: "/radar",
                 ),
+                _ExampleTile(
+                  title: "Stock",
+                  iconData: Icons.business,
+                  route: "/stock",
+                ),
               ],
             )));
   }
