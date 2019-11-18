@@ -4,6 +4,25 @@ import '../types.dart';
 
 /// A time frame
 class TimeFrame {
+  /// Populate data to now at a time interval
+  static Map<DateTime, num> populateToNow(
+      {@required Map<DateTime, num> dataset,
+      @required Duration timePeriod,
+      num value = 0}) {
+    final _d = dataset.keys;
+    _d.toList().sort((a, b) => a.compareTo(b));
+    var date = _d.last;
+    final now = DateTime.now();
+    final data = dataset;
+    print("DATA START $data");
+    while (date.isBefore(now)) {
+      date = date.add(timePeriod);
+      data[date] = value;
+    }
+    print("DATA END $data");
+    return data;
+  }
+
   /// Resample a dataset by a time period
   static Map<DateTime, num> resample(
       {@required Map<DateTime, num> dataset,

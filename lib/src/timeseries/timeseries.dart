@@ -1,9 +1,9 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
-import '../colors.dart';
 import '../models/chart_datapoint.dart';
 import '../models/resample.dart';
+import 'build_tschart.dart';
 import 'timeframe.dart';
 
 class _TimeSerieChartState extends State<TimeSerieChart> {
@@ -19,11 +19,7 @@ class _TimeSerieChartState extends State<TimeSerieChart> {
       this.axisColor = Colors.grey})
       : assert(dataset != null),
         assert(dataset.length > 1),
-        _dataset = dataset {
-    _textColor = getColorForFlutterCharts(textColor);
-    _lineColor = getColorForFlutterCharts(lineColor);
-    _axisColor = getColorForFlutterCharts(axisColor);
-  }
+        _dataset = dataset;
 
   final Color textColor;
 
@@ -42,10 +38,6 @@ class _TimeSerieChartState extends State<TimeSerieChart> {
   final bool showLine;
 
   final Color lineColor;
-
-  charts.Color _textColor;
-  charts.Color _lineColor;
-  charts.Color _axisColor;
 
   final _dataPoints = <ChartDataPoint<DateTime, num>>[];
   final _seriesList = <charts.Series<dynamic, DateTime>>[];
@@ -67,14 +59,8 @@ class _TimeSerieChartState extends State<TimeSerieChart> {
     });
     _seriesList.addAll([
       charts.Series<ChartDataPoint<DateTime, num>, DateTime>(
-        /*colorFn: (dataPoint, __) {
-          var c = _lineColor;
-          if (dataPoint.y > 4) {
-            c = charts.MaterialPalette.red.shadeDefault;
-          }
-          return c;
-        },*/
-        seriesColor: _lineColor,
+        id: "1",
+        //seriesColor: lineColor,
         domainFn: (ChartDataPoint<DateTime, num> dataPoint, _) => dataPoint.x,
         measureFn: (ChartDataPoint<DateTime, num> dataPoint, _) => dataPoint.y,
         data: _dataPoints,
@@ -86,29 +72,8 @@ class _TimeSerieChartState extends State<TimeSerieChart> {
   @override
   Widget build(BuildContext context) {
     return _ready
-        ? charts.TimeSeriesChart(
-            _seriesList,
-            domainAxis: charts.DateTimeAxisSpec(
-                renderSpec: charts.SmallTickRendererSpec(
-                    labelStyle: charts.TextStyleSpec(
-                        fontSize: fontSize, // size in Pts.
-                        color: _textColor),
-                    lineStyle: charts.LineStyleSpec(color: _axisColor))),
-            primaryMeasureAxis: charts.NumericAxisSpec(
-                renderSpec: charts.SmallTickRendererSpec(
-                    labelStyle: charts.TextStyleSpec(
-                        fontSize: fontSize, // size in Pts.
-                        color: _textColor),
-                    lineStyle: charts.LineStyleSpec(color: _axisColor)),
-                tickProviderSpec: const charts.BasicNumericTickProviderSpec(
-                    desiredMinTickCount: 3, zeroBound: false)),
-            animate: true,
-            defaultRenderer: charts.LineRendererConfig(
-                includePoints: showPoints,
-                includeArea: showArea,
-                includeLine: showLine),
-            dateTimeFactory: const charts.LocalDateTimeFactory(),
-          )
+        ? buildFcTimeriesChart(_seriesList, fontSize, textColor, lineColor,
+            axisColor, showPoints, showArea, showLine, true)
         : const Center(child: CircularProgressIndicator());
   }
 }
